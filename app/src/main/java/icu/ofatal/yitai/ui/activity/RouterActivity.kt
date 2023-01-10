@@ -1,4 +1,4 @@
-package icu.ofatal.yitai.activity
+package icu.ofatal.yitai.ui.activity
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -20,6 +20,8 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.tencent.mmkv.MMKV
 import dagger.hilt.android.AndroidEntryPoint
 import icu.ofatal.yitai.ui.local.LocalNavController
+import icu.ofatal.yitai.ui.screen.login.LoginScreen
+import icu.ofatal.yitai.ui.theme.YitaiTheme
 
 @AndroidEntryPoint
 class RouterActivity : AppCompatActivity() {
@@ -42,18 +44,27 @@ class RouterActivity : AppCompatActivity() {
         setContent {
             val navController = rememberAnimatedNavController()
             CompositionLocalProvider(LocalNavController provides navController) {
-                AnimatedNavHost(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colors.background),
-                    navController = navController,
-                    startDestination = "index",
-                    enterTransition = Transition.defaultEnterTransition,
-                    exitTransition = Transition.defaultExitTransition,
-                    popEnterTransition = Transition.defaultPopEnterTransition,
-                    popExitTransition = Transition.defaultPopExitTransition
-                ) {
-                    composable("index") {
+                YitaiTheme {
+                    AnimatedNavHost(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colors.background),
+                        navController = navController,
+                        startDestination = "login",
+                        enterTransition = Transition.defaultEnterTransition,
+                        exitTransition = Transition.defaultExitTransition,
+                        popEnterTransition = Transition.defaultPopEnterTransition,
+                        popExitTransition = Transition.defaultPopExitTransition
+                    ) {
+                        composable("common/index") {
+                        }
+
+                        composable("doctor/index") {
+                        }
+
+                        composable("login") {
+                            LoginScreen(navController = navController)
+                        }
                     }
                 }
             }

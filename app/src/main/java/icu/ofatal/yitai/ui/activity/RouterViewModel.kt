@@ -1,4 +1,4 @@
-package icu.ofatal.yitai.activity
+package icu.ofatal.yitai.ui.activity
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
