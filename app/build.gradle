@@ -101,6 +101,8 @@ dependencies {
     implementation "com.google.accompanist:accompanist-navigation-animation:$acc_version"
     implementation "com.google.accompanist:accompanist-webview:$acc_version"
     implementation "com.google.accompanist:accompanist-adaptive:$acc_version"
+
+    implementation 'com.github.re-ovo:md3compat:1.0.12'
 }
 
 // Allow references to generated code
