@@ -2,24 +2,70 @@ package icu.ofatal.yitai.ui.screen.login
 
 import android.content.Context
 import android.widget.Toast
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 import icu.ofatal.yitai.R
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 
 import icu.ofatal.yitai.data.model.UserRole
+import icu.ofatal.yitai.ui.component.GradientButton
 
 @Composable
-fun LoginScreen(loginViewModel: LoginViewModel = hiltViewModel(), navController: NavController) {
+fun LoginScreen(
+    loginViewModel: LoginViewModel = hiltViewModel(),
+    navController: NavController,
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Image(
+            painter = painterResource(
+                id = R.drawable.login_background,
+            ),
+            contentScale = ContentScale.Crop,
+            contentDescription = "login_background",
+            modifier = Modifier.fillMaxSize()
+        )
+        Content(
+            loginViewModel = loginViewModel,
+            navController = navController,
+            modifier = Modifier.padding(32.dp)
+        )
+    }
+
+}
+
+@Composable
+fun Content(
+    loginViewModel: LoginViewModel,
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     val context = LocalContext.current
 
     // 登录进度对话框
@@ -56,33 +102,63 @@ fun LoginScreen(loginViewModel: LoginViewModel = hiltViewModel(), navController:
         )
     }
 
-    Column() {
-        Text(text = stringResource(id = R.string.app_name))
-        Text(text = stringResource(id = R.string.app_intro))
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier) {
+        Text(text = stringResource(id = R.string.app_name), fontSize = 72.sp, modifier = Modifier.padding(top = 80.dp), fontFamily = FontFamily(
+            listOf(Font(R.font.alimamashuhiti_bold))
+        ))
+
+        Text(
+            text = stringResource(id = R.string.app_intro),
+            fontSize = 18.sp,
+            modifier = Modifier.padding(top = 12.dp, bottom = 70.dp)
+        )
+
+        CustomTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 12.dp),
             value = loginViewModel.username,
             onValueChange = {
                 loginViewModel.username = it.trim().replace("\n", "")
             },
-            placeholder = { Text("输入密码") })
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
+            placeholder = { Text("输入用户名") },
+        )
+
+
+        CustomTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 12.dp),
+
             value = loginViewModel.password,
             onValueChange = {
                 loginViewModel.password = it.trim().replace("\n", "")
             },
-            placeholder = { Text("输入密码") })
-        OutlinedButton(onClick = {
-            doLogin(
-                context = context,
-                loginViewModel = loginViewModel,
-                navController = navController,
-                err = { failedDialog = true },
-                loading = { failedDialog = it })
-        }) {
-            Text("登录")
+            placeholder = { Text("输入密码") },
+
+            )
+        Spacer(modifier = Modifier.height(12.dp))
+
+        GradientButton(
+            gradient = Brush.verticalGradient(
+                listOf(
+                    Color(0xFFF794A5),
+                    Color(0xFFFDD6BD)
+                )
+            ),
+            onClick = {
+                doLogin(
+                    context = context,
+                    loginViewModel = loginViewModel,
+                    navController = navController,
+                    err = { failedDialog = true },
+                    loading = { failedDialog = it })
+            },
+            modifier = Modifier.padding(horizontal = 30.dp, vertical = 8.dp)
+        ) {
+            Text("登录", fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.White, letterSpacing = 8.sp)
         }
+
 
     }
 }
