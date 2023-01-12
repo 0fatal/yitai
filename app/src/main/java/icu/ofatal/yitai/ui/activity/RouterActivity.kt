@@ -20,6 +20,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.tencent.mmkv.MMKV
 import dagger.hilt.android.AndroidEntryPoint
 import icu.ofatal.yitai.ui.local.LocalNavController
+import icu.ofatal.yitai.ui.screen.index.CommonIndexScreen
 import icu.ofatal.yitai.ui.screen.login.LoginScreen
 import icu.ofatal.yitai.ui.theme.YitaiTheme
 
@@ -50,13 +51,14 @@ class RouterActivity : AppCompatActivity() {
                             .fillMaxSize()
                             .background(MaterialTheme.colors.background),
                         navController = navController,
-                        startDestination = "login",
+                        startDestination = "common/index",
                         enterTransition = Transition.defaultEnterTransition,
                         exitTransition = Transition.defaultExitTransition,
                         popEnterTransition = Transition.defaultPopEnterTransition,
                         popExitTransition = Transition.defaultPopExitTransition
                     ) {
                         composable("common/index") {
+                            CommonIndexScreen()
                         }
 
                         composable("doctor/index") {
