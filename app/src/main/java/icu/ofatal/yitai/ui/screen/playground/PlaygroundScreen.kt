@@ -1,7 +1,6 @@
 package icu.ofatal.yitai.ui.screen.playground
 
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -94,7 +93,7 @@ private fun buildMenu() {
             "text" to "康复药物",
         ),
         mapOf(
-            "icon" to R.drawable.icon_equipment,
+            "icon" to R.drawable.icon_health,
             "text" to "健身",
         )
     )
