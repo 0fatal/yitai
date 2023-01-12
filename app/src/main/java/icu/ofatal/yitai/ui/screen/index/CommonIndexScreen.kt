@@ -1,12 +1,16 @@
 package icu.ofatal.yitai.ui.screen.index
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import icu.ofatal.yitai.R
@@ -88,22 +92,27 @@ private fun buildBottomBar(currentPage: Int, scrollToPage: (Int) -> Unit) {
             "page" to 3
         ),
     )
-    NavigationBar {
+    NavigationBar(
+        containerColor = Color.White,
+        modifier = Modifier.clip(RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)),
+    ) {
         items.map {
             NavigationBarItem(
                 icon = {
                     Icon(
                         painter = painterResource(
-                            id = (if (currentPage == it["page"] as Int?) it["icon"] else it["icon_active"]) as Int
+                            id = it["icon"] as Int
                         ),
-                        contentDescription = it["label"] as String
+                        contentDescription = it["label"] as String,
+                        modifier = Modifier.size(20.dp),
+                        tint = (if (currentPage == it["page"] as Int?) colorResource(id = R.color.theme_color) else LocalContentColor.current),
                     )
                 },
                 selected = currentPage == it["page"] as Int,
                 label = {
                     Text(
-                        it["name"] as String,
-                        color = (if (currentPage == it["page"] as Int?) Color(R.color.theme_color) else YitaiGray)
+                        it["label"] as String,
+                        color = (if (currentPage == it["page"] as Int?) colorResource(id = R.color.theme_color) else YitaiGray)
                     )
                 },
                 onClick = {
