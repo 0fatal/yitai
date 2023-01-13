@@ -1,5 +1,6 @@
 package icu.ofatal.yitai.ui.screen.index
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -11,17 +12,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import icu.ofatal.yitai.R
 import icu.ofatal.yitai.ui.screen.playground.PlaygroundScreen
 import icu.ofatal.yitai.ui.theme.YitaiGray
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun CommonIndexScreen() {
-    val pagerState = rememberPagerState()
+fun CommonIndexScreen(navController: NavController) {
+    val pagerState = rememberPagerState(0)
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
@@ -34,29 +35,33 @@ fun CommonIndexScreen() {
                     }
                 }
             )
-        }
+        },
     ) { innerPadding ->
         Column(
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .padding(innerPadding)
+                .background(MaterialTheme.colorScheme.background)
         ) {
             HorizontalPager(
                 state = pagerState,
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 20.dp),
                 count = 4,
-                userScrollEnabled = false
+                userScrollEnabled = false,
             ) { page ->
                 when (page) {
                     0 -> {
-                        PlaygroundScreen()
+                        PlaygroundScreen(navController = navController)
                     }
                     1 -> {
-                        PlaygroundScreen()
+                        PlaygroundScreen(navController = navController)
                     }
                     2 -> {
-                        PlaygroundScreen()
+                        PlaygroundScreen(navController = navController)
                     }
                     3 -> {
-                        PlaygroundScreen()
+                        PlaygroundScreen(navController = navController)
                     }
                 }
             }

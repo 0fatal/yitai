@@ -19,30 +19,26 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import icu.ofatal.yitai.R
 import icu.ofatal.yitai.data.model.MockProcutions
 
 @Composable
-fun PlaygroundScreen() {
+fun PlaygroundScreen(navController: NavController) {
     val scrollState = rememberScrollState(0)
 
-    Scaffold(
-        modifier = Modifier.padding(horizontal = 20.dp)
+    Column(
+        modifier = Modifier
+            .background(color = Color(0xFFFBFBFD))
+            .fillMaxSize()
+            .verticalScroll(scrollState),
+        verticalArrangement = Arrangement.spacedBy(30.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .background(color = Color(0xFFFBFBFD))
-                .fillMaxSize()
-                .padding(it)
-                .verticalScroll(scrollState),
-            verticalArrangement = Arrangement.spacedBy(30.dp)
-        ) {
-            buildTopBar()
-            buildHeadline()
-            buildSearchBox()
-            buildMenu()
-            buildNewProduction()
-        }
+        buildTopBar(navController)
+        buildHeadline()
+        buildSearchBox()
+        buildMenu()
+        buildNewProduction()
     }
 }
 
@@ -60,19 +56,21 @@ private fun buildHeadline() {
 
 
 @Composable
-private fun buildTopBar(modifier: Modifier = Modifier) {
+private fun buildTopBar(navController: NavController,modifier: Modifier = Modifier) {
     Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = modifier.fillMaxWidth()) {
-        Icon(
+        Image(
             painter = painterResource(id = R.drawable.icon_more),
             contentDescription = "更多",
             modifier = Modifier.size(24.dp)
         )
-        Icon(
+        Image(
             painter = painterResource(
                 id = R.drawable.icon_notification_normal
             ),
             contentDescription = "通知",
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(24.dp).clickable {
+                navController.navigate("notification")
+            }
         )
     }
 }

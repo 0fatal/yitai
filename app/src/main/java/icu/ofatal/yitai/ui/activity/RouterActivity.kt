@@ -9,6 +9,7 @@ import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -22,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import icu.ofatal.yitai.ui.local.LocalNavController
 import icu.ofatal.yitai.ui.screen.index.CommonIndexScreen
 import icu.ofatal.yitai.ui.screen.login.LoginScreen
+import icu.ofatal.yitai.ui.screen.notification.NotificationScreen
 import icu.ofatal.yitai.ui.theme.YitaiTheme
 
 @AndroidEntryPoint
@@ -48,7 +50,7 @@ class RouterActivity : AppCompatActivity() {
                 YitaiTheme {
                     AnimatedNavHost(
                         modifier = Modifier
-                            .fillMaxSize()
+                            .fillMaxSize().statusBarsPadding()
                             .background(MaterialTheme.colors.background),
                         navController = navController,
                         startDestination = "common/index",
@@ -58,7 +60,7 @@ class RouterActivity : AppCompatActivity() {
                         popExitTransition = Transition.defaultPopExitTransition
                     ) {
                         composable("common/index") {
-                            CommonIndexScreen()
+                            CommonIndexScreen(navController = navController)
                         }
 
                         composable("doctor/index") {
@@ -66,6 +68,10 @@ class RouterActivity : AppCompatActivity() {
 
                         composable("login") {
                             LoginScreen(navController = navController)
+                        }
+
+                        composable("notification") {
+                            NotificationScreen()
                         }
                     }
                 }
