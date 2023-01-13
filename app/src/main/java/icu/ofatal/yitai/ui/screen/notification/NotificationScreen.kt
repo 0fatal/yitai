@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import icu.ofatal.yitai.R
 import icu.ofatal.yitai.data.model.MockMessageList
+import icu.ofatal.yitai.ui.component.YTTopBar
 import icu.ofatal.yitai.ui.theme.SmallGray
 
 @Preview
@@ -38,34 +39,14 @@ fun NotificationScreen() {
                 .padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            buildTopBar()
+            YTTopBar("消息")
             buildSearchBox()
             buildMsgList()
         }
     }
 }
 
-@Composable
-private fun buildTopBar() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.icon_menu_outline),
-            modifier = Modifier.size(35.dp),
-            contentDescription = null
-        )
-        Text("消息", color = colorResource(id = R.color.theme_color), fontSize = 20.sp)
-        Image(
-            painter = painterResource(id = R.drawable.icon_notifications_dot),
-            modifier = Modifier.size(35.dp),
-            contentDescription = null
-        )
-    }
-}
+
 
 @Composable
 private fun buildSearchBox() {
