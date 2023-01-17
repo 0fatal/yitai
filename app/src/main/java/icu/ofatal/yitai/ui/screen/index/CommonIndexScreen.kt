@@ -16,6 +16,7 @@ import androidx.navigation.NavController
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import icu.ofatal.yitai.R
+import icu.ofatal.yitai.ui.screen.person.PersonScreen
 import icu.ofatal.yitai.ui.screen.playground.PlaygroundScreen
 import icu.ofatal.yitai.ui.theme.YitaiGray
 import kotlinx.coroutines.launch
@@ -61,7 +62,7 @@ fun CommonIndexScreen(navController: NavController) {
                         PlaygroundScreen(navController = navController)
                     }
                     3 -> {
-                        PlaygroundScreen(navController = navController)
+                        PersonScreen()
                     }
                 }
             }

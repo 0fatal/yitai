@@ -24,6 +24,7 @@ import icu.ofatal.yitai.ui.local.LocalNavController
 import icu.ofatal.yitai.ui.screen.course.CourseScreen
 import icu.ofatal.yitai.ui.screen.equipment.EquipmentScreen
 import icu.ofatal.yitai.ui.screen.index.CommonIndexScreen
+import icu.ofatal.yitai.ui.screen.index.DoctorIndexScreen
 import icu.ofatal.yitai.ui.screen.login.LoginScreen
 import icu.ofatal.yitai.ui.screen.notification.NotificationScreen
 import icu.ofatal.yitai.ui.theme.YitaiTheme
@@ -55,7 +56,7 @@ class RouterActivity : AppCompatActivity() {
                             .fillMaxSize()
                             .background(MaterialTheme.colors.background),
                         navController = navController,
-                        startDestination = "equipment",
+                        startDestination = "doctor/index",
                         enterTransition = Transition.defaultEnterTransition,
                         exitTransition = Transition.defaultExitTransition,
                         popEnterTransition = Transition.defaultPopEnterTransition,
@@ -66,6 +67,7 @@ class RouterActivity : AppCompatActivity() {
                         }
 
                         composable("doctor/index") {
+                            DoctorIndexScreen(navController = navController)
                         }
 
                         composable("login") {
