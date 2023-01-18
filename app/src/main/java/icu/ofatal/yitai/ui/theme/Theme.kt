@@ -67,13 +67,13 @@ fun YitaiTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable 
 }
 
 @Composable
-fun ApplyBarColor(darkTheme: Boolean = LocalDarkMode.current) {
+fun ApplyBarColor(darkTheme: Boolean = LocalDarkMode.current, color: Color =  Color.Transparent) {
     val view = LocalView.current
     val activity = LocalContext.current as Activity
     SideEffect {
         view.context.findActivity().window.apply {
-            statusBarColor = Color.Transparent.toArgb()
-            navigationBarColor = Color.Transparent.toArgb()
+            statusBarColor = color.toArgb()
+            navigationBarColor = color.toArgb()
         }
         WindowCompat.getInsetsController(activity.window,view).apply {
             isAppearanceLightNavigationBars = !darkTheme
