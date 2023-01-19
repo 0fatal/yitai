@@ -47,7 +47,6 @@ fun DoctorIndexScreen(navController: NavController) {
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(innerPadding)
                 .background(MaterialTheme.colorScheme.background)
         ) {
             HorizontalPager(
@@ -60,16 +59,16 @@ fun DoctorIndexScreen(navController: NavController) {
             ) { page ->
                 when (page) {
                     0 -> {
-                        PlaygroundScreen(navController = navController)
+                        PlaygroundScreen(navController = navController, modifier = Modifier.padding(innerPadding).padding(20.dp))
                     }
                     1 -> {
-                        CaseDataScreen()
+                        CaseDataScreen(navController = navController)
                     }
                     2 -> {
                         PlaygroundScreen(navController = navController)
                     }
                     3 -> {
-                        PersonScreen()
+                        PersonScreen(modifier = Modifier.padding(innerPadding).padding(horizontal = 20.dp))
                     }
                 }
             }

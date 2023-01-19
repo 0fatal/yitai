@@ -33,11 +33,12 @@ import icu.ofatal.yitai.util.findActivity
 
 @Preview
 @Composable
-fun PersonScreen() {
+fun PersonScreen(modifier: Modifier = Modifier) {
     val scrollState = rememberScrollState(0)
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .then(modifier)
             .verticalScroll(scrollState),
         verticalArrangement = Arrangement.spacedBy(30.dp)
     ) {
@@ -116,6 +117,7 @@ fun buildFunction() {
             buildSubFunction(title = "课程资源", icon = R.drawable.icon_func_course, path = "")
             buildSubFunction(title = "在线社区", icon = R.drawable.icon_func_community, path = "")
         }
+        Spacer(modifier = Modifier.height(30.dp))
     }
 }
 

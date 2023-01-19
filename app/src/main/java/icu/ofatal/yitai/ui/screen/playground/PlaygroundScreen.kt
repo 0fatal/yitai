@@ -24,14 +24,14 @@ import icu.ofatal.yitai.R
 import icu.ofatal.yitai.data.model.MockProcutions
 
 @Composable
-fun PlaygroundScreen(navController: NavController) {
+fun PlaygroundScreen(navController: NavController, modifier: Modifier = Modifier) {
     val scrollState = rememberScrollState(0)
 
     Column(
         modifier = Modifier
             .background(color = Color(0xFFFBFBFD))
             .fillMaxSize()
-            .verticalScroll(scrollState),
+            .verticalScroll(scrollState).then(modifier),
         verticalArrangement = Arrangement.spacedBy(30.dp)
     ) {
         buildTopBar(navController)

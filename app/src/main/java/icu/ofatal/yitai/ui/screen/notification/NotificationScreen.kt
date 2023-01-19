@@ -46,6 +46,21 @@ fun NotificationScreen() {
     }
 }
 
+@Preview
+@Composable
+fun NotificationScreenInline() {
+    val scrollState = rememberScrollState(0)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        YTTopBar("消息")
+        buildSearchBox()
+        buildMsgList()
+    }
+}
 
 
 @Composable

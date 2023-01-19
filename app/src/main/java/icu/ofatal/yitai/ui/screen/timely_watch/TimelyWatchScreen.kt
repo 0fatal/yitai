@@ -135,8 +135,8 @@ fun buildModel(pagerState: PagerState) {
         ) { page ->
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
                     .shadow(10.dp, shape = RoundedCornerShape(6.dp))
+                    .fillMaxWidth()
                     .background(Color(0xFFC4E0FF).copy(0.73f), shape = RoundedCornerShape(6.dp))
                     .padding(10.dp)
             ) {

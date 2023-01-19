@@ -57,7 +57,7 @@ class RouterActivity : AppCompatActivity() {
                             .fillMaxSize()
                             .background(MaterialTheme.colors.background),
                         navController = navController,
-                        startDestination = "timely-watch",
+                        startDestination = "common/index",
                         enterTransition = Transition.defaultEnterTransition,
                         exitTransition = Transition.defaultExitTransition,
                         popEnterTransition = Transition.defaultPopEnterTransition,

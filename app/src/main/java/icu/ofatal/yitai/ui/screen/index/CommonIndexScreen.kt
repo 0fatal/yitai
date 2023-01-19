@@ -16,6 +16,7 @@ import androidx.navigation.NavController
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import icu.ofatal.yitai.R
+import icu.ofatal.yitai.ui.screen.notification.NotificationScreenInline
 import icu.ofatal.yitai.ui.screen.person.PersonScreen
 import icu.ofatal.yitai.ui.screen.playground.PlaygroundScreen
 import icu.ofatal.yitai.ui.theme.YitaiGray
@@ -53,10 +54,10 @@ fun CommonIndexScreen(navController: NavController) {
             ) { page ->
                 when (page) {
                     0 -> {
-                        PlaygroundScreen(navController = navController)
+                        PlaygroundScreen(navController = navController,modifier = Modifier.padding(top = 20.dp))
                     }
                     1 -> {
-                        PlaygroundScreen(navController = navController)
+                        NotificationScreenInline()
                     }
                     2 -> {
                         PlaygroundScreen(navController = navController)
@@ -80,9 +81,9 @@ private fun buildBottomBar(currentPage: Int, scrollToPage: (Int) -> Unit) {
             "page" to 0
         ),
         mapOf(
-            "icon" to R.drawable.icon_shopping,
-            "icon_active" to R.drawable.icon_shopping_active,
-            "label" to "购物车",
+            "icon" to R.drawable.icon_message,
+            "icon_active" to R.drawable.icon_message,
+            "label" to "消息",
             "page" to 1
         ),
         mapOf(

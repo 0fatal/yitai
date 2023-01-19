@@ -21,15 +21,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavController
 import icu.ofatal.yitai.R
 import icu.ofatal.yitai.ui.component.DashedDivider
 
-@Preview(backgroundColor = 0xFFFFFFFF)
+//@Preview(backgroundColor = 0xFFFFFFFF)
 @Composable
-fun CaseDataScreen() {
+fun CaseDataScreen(navController: NavController, modifier: Modifier = Modifier) {
     Column(modifier = Modifier.fillMaxSize()) {
-        buildTopCard()
-        buildData()
+        buildTopCard(modifier)
+        buildData(navController = navController)
     }
 }
 
@@ -76,7 +77,7 @@ private fun buildScrollBox() {
     val scrollState = rememberScrollState(0)
     Row(
         modifier = Modifier
-            .offset(y = 175.dp)
+            .offset(y = 190.dp)
             .horizontalScroll(scrollState)
     ) {
         repeat(3) {
@@ -156,7 +157,7 @@ private fun buildScrollBox() {
 }
 
 @Composable
-private fun buildTopCard() {
+private fun buildTopCard(modifier: Modifier = Modifier) {
     var expanded = remember { mutableStateOf(false) }
 
     Box(
@@ -173,10 +174,13 @@ private fun buildTopCard() {
             )
             .height(246.dp)
             .zIndex(3f)
+            .then(modifier)
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(24.dp),
-            modifier = Modifier.padding(20.dp)
+            modifier = Modifier
+                .padding(20.dp)
+                .padding(top = 20.dp)
         ) {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -307,7 +311,7 @@ private fun buildUpdatedData() {
 }
 
 @Composable
-private fun buildNotUpdatedData() {
+private fun buildNotUpdatedData(navController: NavController) {
     val items = listOf(
         mapOf(
             "text" to "患者B数据库",
@@ -346,6 +350,7 @@ private fun buildNotUpdatedData() {
             items.map {
                 Box(
                     modifier = Modifier
+                        .clickable { navController.navigate("timely-watch") }
                         .shadow(
                             13.dp,
                             spotColor = Color(0xFFD6E2F6),
@@ -401,7 +406,7 @@ private fun buildNotUpdatedData() {
 }
 
 @Composable
-private fun buildData() {
+private fun buildData(navController: NavController) {
     val scrollState = rememberScrollState(0)
     Column(
         modifier = Modifier
@@ -419,7 +424,7 @@ private fun buildData() {
             .verticalScroll(scrollState)
     ) {
         buildUpdatedData()
-        buildNotUpdatedData()
+        buildNotUpdatedData(navController)
         Spacer(modifier = Modifier.height(100.dp))
     }
 }
