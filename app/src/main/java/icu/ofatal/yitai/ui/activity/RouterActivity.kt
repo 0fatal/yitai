@@ -27,6 +27,7 @@ import icu.ofatal.yitai.ui.screen.index.CommonIndexScreen
 import icu.ofatal.yitai.ui.screen.index.DoctorIndexScreen
 import icu.ofatal.yitai.ui.screen.login.LoginScreen
 import icu.ofatal.yitai.ui.screen.notification.NotificationScreen
+import icu.ofatal.yitai.ui.screen.timely_watch.TimelyWatchScreen
 import icu.ofatal.yitai.ui.theme.YitaiTheme
 
 @AndroidEntryPoint
@@ -56,7 +57,7 @@ class RouterActivity : AppCompatActivity() {
                             .fillMaxSize()
                             .background(MaterialTheme.colors.background),
                         navController = navController,
-                        startDestination = "doctor/index",
+                        startDestination = "timely-watch",
                         enterTransition = Transition.defaultEnterTransition,
                         exitTransition = Transition.defaultExitTransition,
                         popEnterTransition = Transition.defaultPopEnterTransition,
@@ -84,6 +85,10 @@ class RouterActivity : AppCompatActivity() {
 
                         composable("equipment") {
                             EquipmentScreen()
+                        }
+
+                        composable("timely-watch") {
+                            TimelyWatchScreen()
                         }
                     }
                 }
