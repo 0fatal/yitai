@@ -2,11 +2,13 @@ package icu.ofatal.yitai.ui.screen.equipment
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -17,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import icu.ofatal.yitai.R
+import icu.ofatal.yitai.data.api.Bemfa
 import icu.ofatal.yitai.ui.component.DashedDivider
 import icu.ofatal.yitai.ui.component.VerticalSlider
 
@@ -56,7 +59,28 @@ private fun buildTopBar() {
 
 @Composable
 private fun buildAdjust() {
+    val bemfa = remember {
+        Bemfa()
+    }
     Column {
+//        Row(
+//            modifier = Modifier.fillMaxWidth(),
+//            horizontalArrangement = Arrangement.Center
+//        ) {
+//            Box(
+//                modifier = Modifier
+//                    .shadow(
+//                        40.dp, shape = CircleShape, spotColor = Color(0xFFBAC2E7)
+//                    )
+//                    .size(120.dp)
+//                    .background(Color.White, shape = CircleShape)
+//                    .clickable {
+//                    },
+//                contentAlignment = Alignment.Center
+//            ) {
+//                Text(text = "启动", fontSize = 24.sp, maxLines = 2, letterSpacing = 1.sp)
+//            }
+//        }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -64,10 +88,12 @@ private fun buildAdjust() {
         ) {
             Box(
                 modifier = Modifier
-                    .shadow(40.dp, shape = RoundedCornerShape(22.dp), spotColor = Color(0xFFBAC2E7))
+                    .shadow(40.dp, shape = CircleShape, spotColor = Color(0xFFBAC2E7))
                     .size(68.dp)
-                    .background(Color.White, shape = CircleShape),
-
+                    .background(Color.White, shape = CircleShape)
+                    .clickable {
+                        bemfa.front()
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Text(text = "-", fontSize = 25.sp, color = Color(0xFF3D8AFF))
@@ -89,7 +115,10 @@ private fun buildAdjust() {
                 modifier = Modifier
                     .shadow(40.dp, shape = RoundedCornerShape(22.dp), spotColor = Color(0xFFBAC2E7))
                     .size(68.dp)
-                    .background(Color.White, shape = CircleShape),
+                    .background(Color.White, shape = CircleShape)
+                    .clickable {
+                        bemfa.back()
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Text(text = "+", fontSize = 25.sp, color = Color(0xFF3D8AFF))

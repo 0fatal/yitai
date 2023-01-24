@@ -14,9 +14,8 @@ enum class Command(val value: String) {
     STOP("stop")
 }
 
-class Bemfa @Inject constructor(
-    private val client: OkHttpClient
-) {
+class Bemfa {
+    private val client = OkHttpClient()
     private val URLENCODED: MediaType = "application/x-www-form-urlencoded".toMediaType()
 
     companion object {
