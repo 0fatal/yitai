@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "icu.ofatal.yitai"
         minSdk 29
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -103,6 +103,8 @@ dependencies {
     implementation "com.google.accompanist:accompanist-adaptive:$acc_version"
 
     implementation 'com.github.re-ovo:md3compat:1.0.12'
+
+    implementation("androidx.core:core-splashscreen:1.0.0")
 }
 
 // Allow references to generated code

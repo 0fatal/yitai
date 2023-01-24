@@ -1,6 +1,7 @@
 package icu.ofatal.yitai.ui.screen.index
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -132,7 +133,13 @@ private fun buildBottomBar(currentPage: Int, scrollToPage: (Int) -> Unit) {
         }
         NavigationBar(
             containerColor = Color.White,
-            modifier = Modifier.clip(RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)),
+            modifier = Modifier
+                .border(
+                    width = 1.dp,
+                    color = Color(0xFFB0B1B1).copy(0.2f),
+                    shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)
+                )
+                .clip(RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)),
         ) {
             items.forEachIndexed { index, it ->
                 if (index == 2) {

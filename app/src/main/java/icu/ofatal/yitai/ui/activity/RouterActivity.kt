@@ -1,5 +1,6 @@
 package icu.ofatal.yitai.ui.activity
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -9,10 +10,10 @@ import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavBackStackEntry
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -23,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import icu.ofatal.yitai.ui.local.LocalNavController
 import icu.ofatal.yitai.ui.screen.community.CommunityScreen
 import icu.ofatal.yitai.ui.screen.course.CourseScreen
+import icu.ofatal.yitai.ui.screen.equipment.EquipmentAdjustScreen
 import icu.ofatal.yitai.ui.screen.equipment.EquipmentScreen
 import icu.ofatal.yitai.ui.screen.health.HealthScreen
 import icu.ofatal.yitai.ui.screen.index.CommonIndexScreen
@@ -39,6 +41,11 @@ class RouterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            installSplashScreen()
+//            splashScreen.setKeepOnScreenCondition { true }
+        }
 
         // Night Mode
         MMKV.defaultMMKV().getInt("nightMode", 0).let {
@@ -59,7 +66,7 @@ class RouterActivity : AppCompatActivity() {
                             .fillMaxSize()
                             .background(MaterialTheme.colors.background),
                         navController = navController,
-                        startDestination = "common/index",
+                        startDestination = "login",
                         enterTransition = Transition.defaultEnterTransition,
                         exitTransition = Transition.defaultExitTransition,
                         popEnterTransition = Transition.defaultPopEnterTransition,
@@ -87,6 +94,10 @@ class RouterActivity : AppCompatActivity() {
 
                         composable("equipment") {
                             EquipmentScreen()
+                        }
+
+                        composable("equipment/adjust") {
+                            EquipmentAdjustScreen()
                         }
 
                         composable("timely-watch") {

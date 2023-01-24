@@ -23,7 +23,7 @@ import icu.ofatal.yitai.ui.component.VerticalSlider
 @Preview
 @Composable
 fun EquipmentAdjustScreen() {
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxHeight(fraction = 0.85f)) {
         Image(
             painter = painterResource(id = R.drawable.equipment_adjustment_background),
             contentDescription = null,

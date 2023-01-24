@@ -36,6 +36,7 @@ fun DoctorPersonScreen() {
                         end = Offset(300f, -100f),
                     )
                 )
+                .statusBarsPadding()
                 .padding(bottom = 16.dp)
         ) {
             Column(
@@ -207,7 +208,7 @@ private fun buildBaseInfo() {
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.course_author1),
+                painter = painterResource(id = R.drawable.avatar),
                 contentDescription = null,
                 modifier = Modifier
                     .size(93.dp)

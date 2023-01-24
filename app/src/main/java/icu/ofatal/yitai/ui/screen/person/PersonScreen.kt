@@ -118,7 +118,7 @@ fun buildFunction(navController: NavController) {
             buildSubFunction(
                 title = "设备微调",
                 icon = R.drawable.icon_func_adjustment,
-                path = "equipment",
+                path = "equipment/adjust",
                 navController = navController
             )
             buildSubFunction(

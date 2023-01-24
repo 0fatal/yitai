@@ -103,9 +103,14 @@ fun Content(
     }
 
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier) {
-        Text(text = stringResource(id = R.string.app_name), fontSize = 72.sp, modifier = Modifier.padding(top = 80.dp), fontFamily = FontFamily(
-            listOf(Font(R.font.alimamashuhiti_bold))
-        ))
+        Text(
+            text = stringResource(id = R.string.app_name),
+            fontSize = 72.sp,
+            modifier = Modifier.padding(top = 80.dp),
+            fontFamily = FontFamily(
+                listOf(Font(R.font.alimamashuhiti_bold))
+            )
+        )
 
         Text(
             text = stringResource(id = R.string.app_intro),
@@ -121,7 +126,7 @@ fun Content(
             onValueChange = {
                 loginViewModel.username = it.trim().replace("\n", "")
             },
-            placeholder = { Text("输入用户名") },
+            placeholder = { Text("输入用户名", fontSize = 12.sp) },
         )
 
 
@@ -134,7 +139,7 @@ fun Content(
             onValueChange = {
                 loginViewModel.password = it.trim().replace("\n", "")
             },
-            placeholder = { Text("输入密码") },
+            placeholder = { Text("输入密码", fontSize = 12.sp) },
 
             )
         Spacer(modifier = Modifier.height(12.dp))
@@ -147,19 +152,54 @@ fun Content(
                 )
             ),
             onClick = {
-                doLogin(
-                    context = context,
-                    loginViewModel = loginViewModel,
-                    navController = navController,
-                    err = { failedDialog = true },
-                    loading = { failedDialog = it })
+//                doLogin(
+//                    context = context,
+//                    loginViewModel = loginViewModel,
+//                    navController = navController,
+//                    err = { failedDialog = true },
+//                    loading = { failedDialog = it })
+                Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show()
+                navController.navigate("common/index") {
+                    popUpTo("login") {
+                        inclusive = true
+                    }
+                }
             },
             modifier = Modifier.padding(horizontal = 30.dp, vertical = 8.dp)
         ) {
-            Text("登录", fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.White, letterSpacing = 8.sp)
+            Text(
+                "普通端登录",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                letterSpacing = 1.sp
+            )
         }
-
-
+        GradientButton(
+            gradient = Brush.verticalGradient(
+                listOf(
+                    Color(0xFF66A6FF),
+                    Color(0xFF8AF7FF),
+                )
+            ),
+            onClick = {
+                Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show()
+                navController.navigate("doctor/index") {
+                    popUpTo("login") {
+                        inclusive = true
+                    }
+                }
+            },
+            modifier = Modifier.padding(horizontal = 30.dp, vertical = 8.dp)
+        ) {
+            Text(
+                "医师端登录",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                letterSpacing = 1.sp
+            )
+        }
     }
 }
 

@@ -2,11 +2,12 @@ package icu.ofatal.yitai.ui.screen.equipment
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,29 +20,41 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import icu.ofatal.yitai.R
+import kotlinx.coroutines.launch
 
 @Preview
 @Composable
 fun EquipmentScreen() {
-    Scaffold(bottomBar = {
-        buildBottomBar()
-    }) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            Image(
-                painter = painterResource(id = R.drawable.equipment_background),
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-            Column(
-                modifier = Modifier
-                    .statusBarsPadding()
-                    .padding(it)
-                    .padding(20.dp)
-            ) {
-                buildTopBar()
-                buildDashboard()
-                buildDataBoard()
+    val sheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden,
+        confirmStateChange = { it != ModalBottomSheetValue.HalfExpanded }
+    )
+    ModalBottomSheetLayout(
+        sheetState = sheetState,
+        sheetContent = { EquipmentAdjustScreen() },
+        modifier = Modifier.fillMaxSize(),
+        sheetShape = RoundedCornerShape(44.dp, 44.dp, 0.dp, 0.dp)
+    ) {
+        Scaffold(bottomBar = {
+            buildBottomBar(sheetState)
+        }) {
+            Box(modifier = Modifier.fillMaxSize()) {
+                Image(
+                    painter = painterResource(id = R.drawable.equipment_background),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+                Column(
+                    modifier = Modifier
+                        .statusBarsPadding()
+                        .padding(it)
+                        .padding(20.dp)
+                ) {
+                    buildTopBar()
+                    buildDashboard()
+                    buildDataBoard()
+                }
             }
         }
     }
@@ -192,7 +205,9 @@ fun buildDataBoard() {
 
 
 @Composable
-private fun buildBottomBar() {
+private fun buildBottomBar(sheetState: ModalBottomSheetState) {
+    val coroutineScope = rememberCoroutineScope()
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -211,6 +226,12 @@ private fun buildBottomBar() {
             painter = painterResource(id = R.drawable.icon_add_circle),
             contentDescription = null,
             modifier = Modifier
+                .clickable {
+                    coroutineScope.launch {
+                        if (sheetState.isVisible) sheetState.hide()
+                        else sheetState.animateTo(ModalBottomSheetValue.Expanded)
+                    }
+                }
                 .size(68.dp)
                 .weight(1f)
         )
