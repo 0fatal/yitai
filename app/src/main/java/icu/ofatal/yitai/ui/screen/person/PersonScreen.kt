@@ -46,7 +46,7 @@ fun PersonScreen(modifier: Modifier = Modifier, navController: NavController) {
 }
 
 @Composable
-fun buildBaseInfo() {
+private fun buildBaseInfo() {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,

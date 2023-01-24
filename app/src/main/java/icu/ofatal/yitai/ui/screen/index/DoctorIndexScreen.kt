@@ -1,7 +1,6 @@
 package icu.ofatal.yitai.ui.screen.index
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,6 +21,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import icu.ofatal.yitai.R
 import icu.ofatal.yitai.ui.screen.case_data.CaseDataScreen
+import icu.ofatal.yitai.ui.screen.person.DoctorPersonScreen
 import icu.ofatal.yitai.ui.screen.person.PersonScreen
 import icu.ofatal.yitai.ui.screen.playground.PlaygroundScreen
 import icu.ofatal.yitai.ui.theme.YitaiGray
@@ -73,12 +72,7 @@ fun DoctorIndexScreen(navController: NavController) {
                         PlaygroundScreen(navController = navController)
                     }
                     3 -> {
-                        PersonScreen(
-                            modifier = Modifier
-                                .padding(innerPadding)
-                                .padding(horizontal = 20.dp),
-                            navController = navController
-                        )
+                        DoctorPersonScreen()
                     }
                 }
             }
