@@ -24,6 +24,7 @@ import icu.ofatal.yitai.ui.local.LocalNavController
 import icu.ofatal.yitai.ui.screen.community.CommunityScreen
 import icu.ofatal.yitai.ui.screen.course.CourseScreen
 import icu.ofatal.yitai.ui.screen.equipment.EquipmentScreen
+import icu.ofatal.yitai.ui.screen.health.HealthScreen
 import icu.ofatal.yitai.ui.screen.index.CommonIndexScreen
 import icu.ofatal.yitai.ui.screen.index.DoctorIndexScreen
 import icu.ofatal.yitai.ui.screen.login.LoginScreen
@@ -93,7 +94,11 @@ class RouterActivity : AppCompatActivity() {
                         }
 
                         composable("community") {
-                            CommunityScreen()
+                            CommunityScreen(navController = navController)
+                        }
+
+                        composable("health") {
+                            HealthScreen(navController = navController)
                         }
                     }
                 }
