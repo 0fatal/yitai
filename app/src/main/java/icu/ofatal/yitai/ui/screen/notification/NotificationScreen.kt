@@ -13,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -48,10 +49,10 @@ fun NotificationScreen() {
 
 @Preview
 @Composable
-fun NotificationScreenInline() {
+fun NotificationScreenInline(modifier: Modifier = Modifier) {
     val scrollState = rememberScrollState(0)
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .verticalScroll(scrollState),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -67,7 +68,13 @@ fun NotificationScreenInline() {
 private fun buildSearchBox() {
     Box(
         modifier = Modifier
+            .shadow(1.dp, shape = RoundedCornerShape(30.dp))
             .background(SmallGray, shape = RoundedCornerShape(30.dp))
+            .border(
+                width = 1.dp,
+                color = Color(0xFFB0B1B1).copy(0.2f),
+                shape = RoundedCornerShape(30.dp)
+            )
             .fillMaxWidth()
             .padding(horizontal = 14.dp, vertical = 12.dp)
     ) {

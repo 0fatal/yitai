@@ -82,7 +82,7 @@ class RouterActivity : AppCompatActivity() {
                         }
 
                         composable("course") {
-                            CourseScreen()
+                            CourseScreen(navController = navController)
                         }
 
                         composable("equipment") {
@@ -90,7 +90,7 @@ class RouterActivity : AppCompatActivity() {
                         }
 
                         composable("timely-watch") {
-                            TimelyWatchScreen()
+                            TimelyWatchScreen(navController = navController)
                         }
 
                         composable("community") {

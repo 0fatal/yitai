@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import icu.ofatal.yitai.R
 import icu.ofatal.yitai.data.model.MockProcutions
+import icu.ofatal.yitai.ui.theme.SmallGray
 
 @Composable
 fun PlaygroundScreen(navController: NavController, modifier: Modifier = Modifier) {
@@ -222,6 +224,11 @@ private fun buildSearchBox() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .border(
+                width = 1.dp,
+                color = Color(0xFFB0B1B1).copy(0.1f),
+                shape = RoundedCornerShape(10.dp)
+            )
             .background(Color.White, RoundedCornerShape(10.dp))
             .padding(14.dp)
     ) {

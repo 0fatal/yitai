@@ -1,6 +1,7 @@
 package icu.ofatal.yitai.ui.screen.index
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -8,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -17,6 +19,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import icu.ofatal.yitai.R
 import icu.ofatal.yitai.ui.screen.notification.NotificationScreenInline
+import icu.ofatal.yitai.ui.screen.order.OrderScreen
 import icu.ofatal.yitai.ui.screen.person.PersonScreen
 import icu.ofatal.yitai.ui.screen.playground.PlaygroundScreen
 import icu.ofatal.yitai.ui.theme.YitaiGray
@@ -41,29 +44,36 @@ fun CommonIndexScreen(navController: NavController) {
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(innerPadding)
+
                 .background(MaterialTheme.colorScheme.background)
         ) {
             HorizontalPager(
                 state = pagerState,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 20.dp),
+                modifier = Modifier.fillMaxSize(),
                 count = 4,
                 userScrollEnabled = false,
             ) { page ->
                 when (page) {
                     0 -> {
-                        PlaygroundScreen(navController = navController,modifier = Modifier.padding(top = 20.dp))
+                        PlaygroundScreen(
+                            navController = navController,
+                            modifier = Modifier
+                                .padding(innerPadding)
+                                .padding(top = 20.dp)
+                                .padding(horizontal = 20.dp),
+                        )
                     }
                     1 -> {
-                        NotificationScreenInline()
+                        NotificationScreenInline(modifier = Modifier.padding(innerPadding).padding(horizontal = 20.dp))
                     }
                     2 -> {
-                        PlaygroundScreen(navController = navController)
+                        OrderScreen()
                     }
                     3 -> {
-                        PersonScreen(navController = navController)
+                        PersonScreen(
+                            navController = navController,
+                            modifier = Modifier.padding(innerPadding).padding(horizontal = 20.dp)
+                        )
                     }
                 }
             }
@@ -101,7 +111,13 @@ private fun buildBottomBar(currentPage: Int, scrollToPage: (Int) -> Unit) {
     )
     NavigationBar(
         containerColor = Color.White,
-        modifier = Modifier.clip(RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)),
+        modifier = Modifier
+            .border(
+                width = 1.dp,
+                color = Color(0xFFB0B1B1).copy(0.2f),
+                shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)
+            )
+            .clip(RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)),
     ) {
         items.map {
             NavigationBarItem(

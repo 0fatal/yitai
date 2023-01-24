@@ -20,9 +20,9 @@ import androidx.navigation.NavController
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import icu.ofatal.yitai.R
+import icu.ofatal.yitai.ui.screen.ScheduleScreen
 import icu.ofatal.yitai.ui.screen.case_data.CaseDataScreen
 import icu.ofatal.yitai.ui.screen.person.DoctorPersonScreen
-import icu.ofatal.yitai.ui.screen.person.PersonScreen
 import icu.ofatal.yitai.ui.screen.playground.PlaygroundScreen
 import icu.ofatal.yitai.ui.theme.YitaiGray
 import kotlinx.coroutines.launch
@@ -69,7 +69,7 @@ fun DoctorIndexScreen(navController: NavController) {
                         CaseDataScreen(navController = navController)
                     }
                     2 -> {
-                        PlaygroundScreen(navController = navController)
+                        ScheduleScreen()
                     }
                     3 -> {
                         DoctorPersonScreen()

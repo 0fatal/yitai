@@ -20,13 +20,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.google.accompanist.pager.*
 import icu.ofatal.yitai.R
 import kotlin.math.absoluteValue
 
-@Preview(backgroundColor = 0xFFFFFFFF)
 @Composable
-fun TimelyWatchScreen() {
+fun TimelyWatchScreen(navController: NavController) {
     val pagerState = rememberPagerState(initialPage = 1)
 
     Box() {
@@ -64,7 +64,7 @@ fun TimelyWatchScreen() {
                     .padding(horizontal = 20.dp, vertical = 10.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                buildTopBar()
+                buildTopBar(navController = navController)
                 buildModel(pagerState)
             }
             buildModelAdjust(pagerState)
@@ -74,7 +74,7 @@ fun TimelyWatchScreen() {
 }
 
 @Composable
-fun buildTopBar() {
+fun buildTopBar(navController: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -87,7 +87,7 @@ fun buildTopBar() {
                 painter = painterResource(id = R.drawable.icon_arrow_back),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(21.dp, 15.dp),
+                    .size(21.dp, 15.dp).clickable { navController.popBackStack() },
                 tint = Color.White
             )
         }

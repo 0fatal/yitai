@@ -21,12 +21,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavController
 import icu.ofatal.yitai.data.model.Course
 import icu.ofatal.yitai.data.model.MockCourse
+import icu.ofatal.yitai.ui.component.YTTopBarWithBack
 
-@Preview
 @Composable
-fun CourseScreen() {
+fun CourseScreen(navController: NavController) {
     val scrollState = rememberScrollState(0)
     Scaffold {
         Column(
@@ -35,38 +36,13 @@ fun CourseScreen() {
                 .padding(it)
                 .fillMaxSize()
                 .verticalScroll(scrollState)
-                .padding(20.dp),
+                .padding(20.dp)
+                .statusBarsPadding(),
             verticalArrangement = Arrangement.spacedBy(30.dp)
         ) {
-            buildTopBar()
+            YTTopBarWithBack(title = "我的课程", navController = navController)
             buildCourseList()
         }
-    }
-}
-
-@Composable
-private fun buildTopBar() {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Box(modifier = Modifier.weight(1f)) {
-            Image(
-                painter = painterResource(id = icu.ofatal.yitai.R.drawable.icon_arrow_back),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(24.dp)
-            )
-        }
-        Text(
-            "我的课程",
-            modifier = Modifier.weight(1f),
-            fontSize = 17.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            letterSpacing = 1.sp
-        )
-        Spacer(modifier = Modifier.weight(1f))
     }
 }
 

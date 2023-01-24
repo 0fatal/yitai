@@ -89,7 +89,10 @@ fun buildFunction(navController: NavController) {
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("设备管理", fontSize = 16.sp)
+            Text(
+                "设备管理",
+                fontSize = 16.sp,
+                modifier = Modifier.clickable { navController.navigate("equipment") })
             Divider(
                 modifier = Modifier
                     .width(1.dp)
@@ -101,7 +104,10 @@ fun buildFunction(navController: NavController) {
                     .width(1.dp)
                     .height(16.dp)
             )
-            Text("健康信息", fontSize = 16.sp)
+            Text(
+                "健康信息",
+                fontSize = 16.sp,
+                modifier = Modifier.clickable { navController.navigate("health") })
         }
         Divider(thickness = 2.dp, color = Color(0xFFFBB8A2))
 
@@ -109,10 +115,30 @@ fun buildFunction(navController: NavController) {
             mainAxisSize = com.google.accompanist.flowlayout.SizeMode.Expand,
             mainAxisAlignment = FlowMainAxisAlignment.SpaceBetween
         ) {
-            buildSubFunction(title = "设备微调", icon = R.drawable.icon_func_adjustment, path = "equipment", navController = navController)
-            buildSubFunction(title = "在线商城", icon = R.drawable.icon_func_shop, path = "index", navController = navController)
-            buildSubFunction(title = "课程资源", icon = R.drawable.icon_func_course, path = "course", navController = navController)
-            buildSubFunction(title = "在线社区", icon = R.drawable.icon_func_community, path = "community", navController = navController)
+            buildSubFunction(
+                title = "设备微调",
+                icon = R.drawable.icon_func_adjustment,
+                path = "equipment",
+                navController = navController
+            )
+            buildSubFunction(
+                title = "在线商城",
+                icon = R.drawable.icon_func_shop,
+                path = "common/index",
+                navController = navController
+            )
+            buildSubFunction(
+                title = "课程资源",
+                icon = R.drawable.icon_func_course,
+                path = "course",
+                navController = navController
+            )
+            buildSubFunction(
+                title = "在线社区",
+                icon = R.drawable.icon_func_community,
+                path = "community",
+                navController = navController
+            )
         }
         Spacer(modifier = Modifier.height(30.dp))
     }
