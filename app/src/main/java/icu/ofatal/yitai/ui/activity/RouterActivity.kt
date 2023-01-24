@@ -21,6 +21,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.tencent.mmkv.MMKV
 import dagger.hilt.android.AndroidEntryPoint
 import icu.ofatal.yitai.ui.local.LocalNavController
+import icu.ofatal.yitai.ui.screen.community.CommunityScreen
 import icu.ofatal.yitai.ui.screen.course.CourseScreen
 import icu.ofatal.yitai.ui.screen.equipment.EquipmentScreen
 import icu.ofatal.yitai.ui.screen.index.CommonIndexScreen
@@ -89,6 +90,10 @@ class RouterActivity : AppCompatActivity() {
 
                         composable("timely-watch") {
                             TimelyWatchScreen()
+                        }
+
+                        composable("community") {
+                            CommunityScreen()
                         }
                     }
                 }

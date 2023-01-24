@@ -63,7 +63,7 @@ fun CommonIndexScreen(navController: NavController) {
                         PlaygroundScreen(navController = navController)
                     }
                     3 -> {
-                        PersonScreen()
+                        PersonScreen(navController = navController)
                     }
                 }
             }

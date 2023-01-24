@@ -1,12 +1,9 @@
 package icu.ofatal.yitai.ui.screen.person
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.material3.CardDefaults
@@ -25,15 +22,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import icu.ofatal.yitai.R
 import icu.ofatal.yitai.ui.component.YTTopBar
 import icu.ofatal.yitai.util.findActivity
 
-@Preview
 @Composable
-fun PersonScreen(modifier: Modifier = Modifier) {
+fun PersonScreen(modifier: Modifier = Modifier, navController: NavController) {
     val scrollState = rememberScrollState(0)
     Column(
         modifier = Modifier
@@ -44,7 +41,7 @@ fun PersonScreen(modifier: Modifier = Modifier) {
     ) {
         YTTopBar(title = "个人中心")
         buildBaseInfo()
-        buildFunction()
+        buildFunction(navController = navController)
     }
 }
 
@@ -82,7 +79,7 @@ fun buildBaseInfo() {
 }
 
 @Composable
-fun buildFunction() {
+fun buildFunction(navController: NavController) {
     Column(
         verticalArrangement = Arrangement.spacedBy(30.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -112,10 +109,10 @@ fun buildFunction() {
             mainAxisSize = com.google.accompanist.flowlayout.SizeMode.Expand,
             mainAxisAlignment = FlowMainAxisAlignment.SpaceBetween
         ) {
-            buildSubFunction(title = "设备微调", icon = R.drawable.icon_func_adjustment, path = "")
-            buildSubFunction(title = "在线商城", icon = R.drawable.icon_func_shop, path = "")
-            buildSubFunction(title = "课程资源", icon = R.drawable.icon_func_course, path = "")
-            buildSubFunction(title = "在线社区", icon = R.drawable.icon_func_community, path = "")
+            buildSubFunction(title = "设备微调", icon = R.drawable.icon_func_adjustment, path = "equipment", navController = navController)
+            buildSubFunction(title = "在线商城", icon = R.drawable.icon_func_shop, path = "index", navController = navController)
+            buildSubFunction(title = "课程资源", icon = R.drawable.icon_func_course, path = "course", navController = navController)
+            buildSubFunction(title = "在线社区", icon = R.drawable.icon_func_community, path = "community", navController = navController)
         }
         Spacer(modifier = Modifier.height(30.dp))
     }
@@ -132,11 +129,14 @@ fun adaptiveGridCell(): GridCells {
 
 
 @Composable
-fun buildSubFunction(title: String, icon: Int, path: String) {
+fun buildSubFunction(title: String, icon: Int, path: String, navController: NavController) {
     val itemSize = (LocalConfiguration.current.screenWidthDp.dp / 2.3f)
 
     ElevatedCard(
         modifier = Modifier
+            .clickable {
+                navController.navigate(path)
+            }
             .size(itemSize)
             .padding(horizontal = 3.dp, vertical = 6.dp),
         colors = CardDefaults.cardColors(

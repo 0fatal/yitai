@@ -59,7 +59,12 @@ fun DoctorIndexScreen(navController: NavController) {
             ) { page ->
                 when (page) {
                     0 -> {
-                        PlaygroundScreen(navController = navController, modifier = Modifier.padding(innerPadding).padding(20.dp))
+                        PlaygroundScreen(
+                            navController = navController,
+                            modifier = Modifier
+                                .padding(innerPadding)
+                                .padding(20.dp)
+                        )
                     }
                     1 -> {
                         CaseDataScreen(navController = navController)
@@ -68,7 +73,12 @@ fun DoctorIndexScreen(navController: NavController) {
                         PlaygroundScreen(navController = navController)
                     }
                     3 -> {
-                        PersonScreen(modifier = Modifier.padding(innerPadding).padding(horizontal = 20.dp))
+                        PersonScreen(
+                            modifier = Modifier
+                                .padding(innerPadding)
+                                .padding(horizontal = 20.dp),
+                            navController = navController
+                        )
                     }
                 }
             }
