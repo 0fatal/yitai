@@ -89,7 +89,7 @@ private fun buildDashboard() {
 
 
 @Composable
-private fun buildDataBoard() {
+fun buildDataBoard() {
     val itemSize = (LocalConfiguration.current.screenWidthDp.dp / 2.4f)
 
     Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {

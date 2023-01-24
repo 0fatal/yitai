@@ -18,13 +18,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import icu.ofatal.yitai.R
 import icu.ofatal.yitai.data.model.MockPostList
 import icu.ofatal.yitai.data.model.Post
+import icu.ofatal.yitai.ui.component.YTTopBarWithBack
 
-@Preview
 @Composable
-fun CommunityScreen() {
+fun CommunityScreen(navController: NavController) {
     Scaffold() {
         Column(
             verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -32,11 +33,7 @@ fun CommunityScreen() {
                 .padding(it)
                 .padding(20.dp)
         ) {
-            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                Image(painter = painterResource(id = R.drawable.icon_arrow_back), contentDescription = null, modifier = Modifier.size(21.dp, 15.dp))
-                Text("在线社区", fontSize = 16.sp)
-                Spacer(modifier = Modifier.size(21.dp))
-            }
+            YTTopBarWithBack(title = "在线社区", navController = navController)
             Row(
                 horizontalArrangement = Arrangement.spacedBy(20.dp)
             ) {
