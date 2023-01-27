@@ -79,7 +79,7 @@ private fun buildBaseInfo() {
 }
 
 @Composable
-fun buildFunction(navController: NavController) {
+private fun buildFunction(navController: NavController) {
     Column(
         verticalArrangement = Arrangement.spacedBy(30.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
