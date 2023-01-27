@@ -22,6 +22,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.tencent.mmkv.MMKV
 import dagger.hilt.android.AndroidEntryPoint
 import icu.ofatal.yitai.ui.local.LocalNavController
+import icu.ofatal.yitai.ui.screen.case_data.CaseDataScreen
 import icu.ofatal.yitai.ui.screen.community.CommunityScreen
 import icu.ofatal.yitai.ui.screen.course.CourseScreen
 import icu.ofatal.yitai.ui.screen.equipment.EquipmentAdjustScreen
@@ -110,6 +111,10 @@ class RouterActivity : AppCompatActivity() {
 
                         composable("health") {
                             HealthScreen(navController = navController)
+                        }
+
+                        composable("case-data") {
+                            CaseDataScreen(navController = navController)
                         }
                     }
                 }
