@@ -98,7 +98,11 @@ private fun buildFunction(navController: NavController) {
                     .width(1.dp)
                     .height(16.dp)
             )
-            Text("实时监测", fontSize = 16.sp)
+            Text(
+                "实时监测",
+                fontSize = 16.sp,
+                modifier = Modifier.clickable { navController.navigate("timely-watch") },
+            )
             Divider(
                 modifier = Modifier
                     .width(1.dp)

@@ -17,7 +17,6 @@ import androidx.compose.ui.layout.ScaleFactor
 import androidx.compose.ui.layout.lerp
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -54,14 +53,12 @@ fun TimelyWatchScreen(navController: NavController) {
         }
 
         Column(
-            modifier = Modifier
-                .statusBarsPadding(),
+            modifier = Modifier.statusBarsPadding(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             Column(
-                modifier = Modifier
-                    .padding(horizontal = 20.dp, vertical = 10.dp),
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 buildTopBar(navController = navController)
@@ -76,9 +73,7 @@ fun TimelyWatchScreen(navController: NavController) {
 @Composable
 fun buildTopBar(navController: NavController) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
+        modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
             modifier = Modifier.weight(1f),
@@ -87,7 +82,8 @@ fun buildTopBar(navController: NavController) {
                 painter = painterResource(id = R.drawable.icon_arrow_back),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(21.dp, 15.dp).clickable { navController.popBackStack() },
+                    .size(21.dp, 15.dp)
+                    .clickable { navController.popBackStack() },
                 tint = Color.White
             )
         }
@@ -107,16 +103,14 @@ fun buildTopBar(navController: NavController) {
             Icon(
                 painter = painterResource(id = R.drawable.icon_search),
                 contentDescription = null,
-                modifier = Modifier
-                    .size(21.dp, 15.dp),
+                modifier = Modifier.size(21.dp, 15.dp),
                 tint = Color.White
             )
             Spacer(modifier = Modifier.width(16.dp))
             Icon(
                 painter = painterResource(id = R.drawable.icon_menu2),
                 contentDescription = null,
-                modifier = Modifier
-                    .size(21.dp, 15.dp),
+                modifier = Modifier.size(21.dp, 15.dp),
                 tint = Color.White
             )
         }
@@ -163,29 +157,27 @@ fun buildModelAdjust(pagerState: PagerState) {
             verticalAlignment = Alignment.CenterVertically,
             contentPadding = PaddingValues(horizontal = 30.dp),
         ) { page ->
-            Box(
-                modifier = Modifier
-                    .shadow(6.dp, shape = RoundedCornerShape(10.dp))
-                    .background(Color.White, shape = RoundedCornerShape(10.dp))
-                    .width(305.dp)
-                    .padding(20.dp)
-                    .graphicsLayer {
-                        val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
-                        lerp(
-                            start = ScaleFactor(0.85f, 0.85f),
-                            stop = ScaleFactor(1f, 1f),
-                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                        ).also { scale ->
-                            scaleX = scale.scaleX
-                            scaleY = scale.scaleY
-                        }
-                        alpha = lerp(
-                            start = ScaleFactor(0.5f, 0.5f),
-                            stop = ScaleFactor(1f, 1f),
-                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
-                        ).scaleX
+            Box(modifier = Modifier
+                .shadow(6.dp, shape = RoundedCornerShape(10.dp))
+                .background(Color.White, shape = RoundedCornerShape(10.dp))
+                .width(305.dp)
+                .padding(20.dp)
+                .graphicsLayer {
+                    val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
+                    lerp(
+                        start = ScaleFactor(0.85f, 0.85f),
+                        stop = ScaleFactor(1f, 1f),
+                        fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                    ).also { scale ->
+                        scaleX = scale.scaleX
+                        scaleY = scale.scaleY
                     }
-            ) {
+                    alpha = lerp(
+                        start = ScaleFactor(0.5f, 0.5f),
+                        stop = ScaleFactor(1f, 1f),
+                        fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                    ).scaleX
+                }) {
                 Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -207,7 +199,9 @@ fun buildModelAdjust(pagerState: PagerState) {
                         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                             Box(
                                 modifier = Modifier
-                                    .background(Color(0xFFE0F5EB), RoundedCornerShape(1.dp))
+                                    .background(
+                                        Color(0xFFE0F5EB), RoundedCornerShape(1.dp)
+                                    )
                                     .padding(horizontal = 10.dp, vertical = 4.dp),
                                 contentAlignment = Alignment.Center
                             ) {
@@ -215,7 +209,9 @@ fun buildModelAdjust(pagerState: PagerState) {
                             }
                             Box(
                                 modifier = Modifier
-                                    .background(Color(0xFFF5DFDF), RoundedCornerShape(1.dp))
+                                    .background(
+                                        Color(0xFFF5DFDF), RoundedCornerShape(1.dp)
+                                    )
                                     .padding(horizontal = 10.dp, vertical = 4.dp),
                                 contentAlignment = Alignment.Center
                             ) {
@@ -243,7 +239,9 @@ fun buildModelAdjust(pagerState: PagerState) {
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .background(Color(0xFFE8E8E8), shape = CircleShape)
+                                    .background(
+                                        Color(0xFFE8E8E8), shape = CircleShape
+                                    )
                                     .size(23.dp)
                             )
                             Text("切换矫形器页面", fontSize = 10.sp, letterSpacing = 1.sp)
