@@ -246,7 +246,7 @@ fun buildModelAdjust(pagerState: PagerState) {
                                     .background(Color(0xFFE8E8E8), shape = CircleShape)
                                     .size(23.dp)
                             )
-                            Text("切换支具页面", fontSize = 10.sp, letterSpacing = 1.sp)
+                            Text("切换矫形器页面", fontSize = 10.sp, letterSpacing = 1.sp)
                         }
                     }
                 }

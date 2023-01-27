@@ -20,7 +20,7 @@ fun MockMessageList(): List<Message> {
                 name = "程医生",
                 avatar = R.drawable.msg_list_people1
             ),
-            latestMsg = "你的矫形支具需要调整，看到请回复",
+            latestMsg = "你的智能矫形具需要调整，看到请回复",
             time = "刚刚"
         ),
         Message(

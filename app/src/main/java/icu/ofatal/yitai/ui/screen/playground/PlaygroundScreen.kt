@@ -82,7 +82,7 @@ private fun buildMenu() {
     val items = listOf<Map<String, *>>(
         mapOf(
             "icon" to R.drawable.icon_util,
-            "text" to "支具",
+            "text" to "矫形器",
         ),
         mapOf(
             "icon" to R.drawable.icon_equipment,
