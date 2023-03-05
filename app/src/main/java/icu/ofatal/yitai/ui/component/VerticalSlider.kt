@@ -96,14 +96,14 @@ class ComposeVerticalSliderState {
         canvasHeight: Int
     ) {
 
-        if (!isEnabled.value) return
+//        if (!isEnabled.value) return
+//
+//        val y = motionEvent.y.roundToInt()
 
-        val y = motionEvent.y.roundToInt()
+//        updateAdjustTopValue(y.toFloat())
 
-        updateAdjustTopValue(y.toFloat())
-
-        val progress = calculateProgress(y.toFloat(), canvasHeight).coerceIn(MIN_VALUE, MAX_VALUE)
-        updateProgressValue(progress)
+//        val progress = calculateProgress(y.toFloat(), canvasHeight).coerceIn(MIN_VALUE, MAX_VALUE)
+//        updateProgressValue(progress)
 
     }
 
@@ -168,17 +168,18 @@ fun ComposeVerticalSlider(
 
     val enabledState by rememberSaveable { state.isEnabled }
     var adjustTop by rememberSaveable { state.adjustTop }
-    var progressValueData by rememberSaveable {
-
-        if (progressValue != null) {
-            state.progressValue.value = progressValue
-            onProgressChanged(state.progressValue.value)
-            onStopTrackingTouch(state.progressValue.value)
-        }
-
-        state.progressValue
-
-    }
+//    var progressValueData by rememberSaveable {
+//
+//        if (progressValue != null) {
+//            state.progressValue.value = progressValue
+//            onProgressChanged(state.progressValue.value)
+//            onStopTrackingTouch(state.progressValue.value)
+//        }
+//
+//        state.progressValue
+//
+//    }
+    var progressValueData = progressValue ?: 0
 
     val rect = Rect(left, top, right, bottom)
     val trackPaint = Paint().apply {
@@ -209,7 +210,7 @@ fun ComposeVerticalSlider(
                             state.updateOnTouch(motionEvent, canvasHeight)
                             adjustTop = state.adjustTop.value
                             progressValueData = state.progressValue.value
-                            onProgressChanged(progressValueData)
+//                            onProgressChanged(progressValueData)
                         }
 
                         enabledState
@@ -219,7 +220,7 @@ fun ComposeVerticalSlider(
                             state.updateOnTouch(motionEvent, canvasHeight)
                             adjustTop = state.adjustTop.value
                             progressValueData = state.progressValue.value
-                            onStopTrackingTouch(progressValueData)
+//                            onStopTrackingTouch(progressValueData)
                         }
 
                         enabledState

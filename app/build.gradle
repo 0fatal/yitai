@@ -103,6 +103,7 @@ dependencies {
     implementation "com.google.accompanist:accompanist-adaptive:$acc_version"
 
     implementation 'com.github.re-ovo:md3compat:1.0.12'
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     implementation("androidx.core:core-splashscreen:1.0.0")
 
@@ -111,6 +112,8 @@ dependencies {
     // define any required OkHttp artifacts without version
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+
+
 }
 
 // Allow references to generated code
