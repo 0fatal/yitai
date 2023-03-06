@@ -99,10 +99,10 @@ private fun buildAdjust(vm: EquipmentAdjustViewModel) {
                     .size(68.dp)
                     .background(Color.White, shape = CircleShape)
                     .clickable {
-                        vm.frontEquipment {
+                        vm.backEquipment {
                             if(it != null) {
                                 Toast.makeText(context,"发生了错误: ${it!!.message}", Toast.LENGTH_SHORT).show()
-                                return@frontEquipment
+                                return@backEquipment
                             }
 
                             val timer = Timer()
@@ -145,10 +145,10 @@ private fun buildAdjust(vm: EquipmentAdjustViewModel) {
                     .size(68.dp)
                     .background(Color.White, shape = CircleShape)
                     .clickable {
-                        vm.backEquipment {
+                        vm.frontEquipment {
                             if(it != null) {
                                 Toast.makeText(context,"发生了错误: ${it!!.message}", Toast.LENGTH_SHORT).show()
-                                return@backEquipment
+                                return@frontEquipment
                             }
 
                             val timer = Timer()

@@ -34,7 +34,7 @@ class Bemfa @Inject constructor() {
 
     private fun postData(command: Command, completion: ((IOException?) -> Unit)? = null) {
         val body: RequestBody =
-            "uid=${UID}&topic=${TOPIC_COMMAND}&type=3&msg=${command}".toRequestBody(URLENCODED)
+            "uid=${UID}&topic=${TOPIC_COMMAND}&type=3&msg=${command.value}".toRequestBody(URLENCODED)
 
         val request = Request.Builder()
             .url("https://apis.bemfa.com/va/postmsg")
@@ -78,8 +78,11 @@ class Bemfa @Inject constructor() {
                         it.body!!.string(),
                         object : TypeToken<ResWrapper<List<PressValue>>>() {}.type
                     )
-                    completion(data.data[0].msg.split("#").filter { v -> v.isNotEmpty() }
-                        .map { v -> v.toDouble() }, null)
+                    if(data.data != null && data.data.isNotEmpty()) {
+                        completion(data.data[0].msg.split("#").filter { v -> v.isNotEmpty() }
+                            .map { v -> v.toDouble() }, null)
+                    }
+
                 }
             }
         })
