@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ScaleFactor
 import androidx.compose.ui.layout.lerp
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -88,7 +89,7 @@ fun buildTopBar(navController: NavController) {
             )
         }
         Text(
-            "实时监测",
+            "初步建模",
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center,
             color = Color.White,
@@ -148,6 +149,8 @@ fun buildModel(pagerState: PagerState) {
 
 @Composable
 fun buildModelAdjust(pagerState: PagerState) {
+    val itemSize = (LocalConfiguration.current.screenWidthDp.dp / 1.3f)
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(10.dp)
@@ -160,7 +163,7 @@ fun buildModelAdjust(pagerState: PagerState) {
             Box(modifier = Modifier
                 .shadow(6.dp, shape = RoundedCornerShape(10.dp))
                 .background(Color.White, shape = RoundedCornerShape(10.dp))
-                .width(305.dp)
+                .width(itemSize)
                 .padding(20.dp)
                 .graphicsLayer {
                     val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue

@@ -165,14 +165,16 @@ fun Content(
                     }
                 }
             },
-            modifier = Modifier.padding(horizontal = 30.dp, vertical = 8.dp)
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
         ) {
             Text(
                 "普通端登录",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White,
-                letterSpacing = 1.sp
+                letterSpacing = 1.sp,
+                maxLines = 1,
+                softWrap = false,
             )
         }
         GradientButton(
@@ -190,14 +192,16 @@ fun Content(
                     }
                 }
             },
-            modifier = Modifier.padding(horizontal = 30.dp, vertical = 8.dp)
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
         ) {
             Text(
                 "医师端登录",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White,
-                letterSpacing = 1.sp
+                letterSpacing = 1.sp,
+                maxLines = 1,
+                softWrap = false,
             )
         }
     }

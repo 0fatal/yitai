@@ -101,7 +101,6 @@ private fun buildFunction(navController: NavController) {
             Text(
                 "实时监测",
                 fontSize = 16.sp,
-                modifier = Modifier.clickable { navController.navigate("timely-watch") },
             )
             Divider(
                 modifier = Modifier
@@ -167,7 +166,8 @@ fun buildSubFunction(title: String, icon: Int, path: String, navController: NavC
             .clickable {
                 navController.navigate(path)
             }
-            .size(itemSize)
+            .width(itemSize)
+            .height(itemSize * 1.2f)
             .padding(horizontal = 3.dp, vertical = 6.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.White
@@ -177,17 +177,16 @@ fun buildSubFunction(title: String, icon: Int, path: String, navController: NavC
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .fillMaxSize()
-                .padding(vertical = 30.dp),
+                .fillMaxSize(),
             verticalArrangement = Arrangement.Center,
         ) {
             Image(
                 painter = painterResource(id = icon),
                 contentDescription = null,
-                modifier = Modifier.size(60.dp)
+                modifier = Modifier.size(50.dp)
             )
             Spacer(modifier = Modifier.height(14.dp))
-            Text(title, fontSize = 16.sp, color = Color.DarkGray)
+            Text(title, fontSize = 14.sp, color = Color.DarkGray)
         }
     }
 }
