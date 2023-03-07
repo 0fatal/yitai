@@ -48,6 +48,30 @@ class EquipmentAdjustViewModel @Inject constructor(
             bemfa.back(completion)
         }
     }
+
+    fun qianEquipment(completion: ((IOException?) -> Unit)? = null) {
+        viewModelScope.launch {
+            bemfa.qian(completion)
+        }
+    }
+
+    fun houEquipment(completion: ((IOException?) -> Unit)? = null) {
+        viewModelScope.launch {
+            bemfa.hou(completion)
+        }
+    }
+
+    fun stopEquipment(completion: ((IOException?) -> Unit)? = null) {
+        viewModelScope.launch {
+            bemfa.stop(completion)
+        }
+    }
+
+    fun tingEquipment(completion: ((IOException?) -> Unit)? = null) {
+        viewModelScope.launch {
+            bemfa.ting(completion)
+        }
+    }
 }
 
 

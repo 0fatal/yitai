@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,7 +42,7 @@ fun EquipmentAdjustScreen(vm: EquipmentAdjustViewModel = hiltViewModel()) {
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
-        Column(modifier = Modifier.padding(20.dp)) {
+        Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
             buildTopBar()
             buildAdjust(vm)
             buildAdjustPrecise(vm)
@@ -88,44 +89,44 @@ private fun buildAdjust(vm: EquipmentAdjustViewModel) {
 //                Text(text = "启动", fontSize = 24.sp, maxLines = 2, letterSpacing = 1.sp)
 //            }
 //        }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier
-                    .shadow(40.dp, shape = CircleShape, spotColor = Color(0xFFBAC2E7))
-                    .size(68.dp)
-                    .background(Color.White, shape = CircleShape)
-                    .clickable {
-                        vm.backEquipment {
-                            if(it != null) {
-                                Toast.makeText(context,"发生了错误: ${it!!.message}", Toast.LENGTH_SHORT).show()
-                                return@backEquipment
-                            }
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text("电机1", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .shadow(40.dp, shape = CircleShape, spotColor = Color(0xFFBAC2E7))
+                            .size(68.dp)
+                            .background(Color.White, shape = CircleShape)
+                            .clickable {
+                                vm.backEquipment {
+                                    if (it != null) {
+                                        Toast
+                                            .makeText(
+                                                context,
+                                                "发生了错误: ${it!!.message}",
+                                                Toast.LENGTH_SHORT
+                                            )
+                                            .show()
+                                        return@backEquipment
+                                    }
 
-                            val timer = Timer()
-                            val timerTask = object : TimerTask() {
-                                override fun run() {
-                                    vm.fetchData()
+                                    runBlocking {
+                                        withContext(Dispatchers.Main) {
+                                            Toast
+                                                .makeText(context, "电机1调松", Toast.LENGTH_SHORT)
+                                                .show()
+                                        }
+                                    }
                                 }
-                            }
-                            timer.schedule(timerTask, 6000)
-
-                            runBlocking {
-                                withContext(Dispatchers.Main) {
-                                    Toast
-                                        .makeText(context, "设备调松", Toast.LENGTH_SHORT)
-                                        .show()
-                                }
-                            }
-                        }
-                    },
-                contentAlignment = Alignment.Center
-            ) {
-                Text(text = "-", fontSize = 25.sp, color = Color(0xFF3D8AFF))
-            }
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(text = "松", fontSize = 20.sp, color = Color(0xFF3D8AFF))
+                    }
 //        Box(
 //            modifier = Modifier
 //                .size(120.dp)
@@ -133,45 +134,189 @@ private fun buildAdjust(vm: EquipmentAdjustViewModel) {
 //        ) {
 //            Text(text = "松紧\n调节", fontSize = 24.sp, maxLines = 2, letterSpacing = 1.sp)
 //        }
-            Image(
-                painter = painterResource(id = R.drawable.icon_adjustment),
-                contentDescription = null,
-                modifier = Modifier.size(180.dp)
-            )
+//            Image(
+//                painter = painterResource(id = R.drawable.icon_adjustment),
+//                contentDescription = null,
+//                modifier = Modifier.size(180.dp)
+//            )
+                    Box(
+                        modifier = Modifier
+                            .shadow(
+                                40.dp,
+                                shape = RoundedCornerShape(22.dp),
+                                spotColor = Color(0xFFBAC2E7)
+                            )
+                            .size(68.dp)
+                            .background(Color.White, shape = CircleShape)
+                            .clickable {
+                                vm.frontEquipment {
+                                    if (it != null) {
+                                        Toast
+                                            .makeText(
+                                                context,
+                                                "发生了错误: ${it!!.message}",
+                                                Toast.LENGTH_SHORT
+                                            )
+                                            .show()
+                                        return@frontEquipment
+                                    }
 
-            Box(
-                modifier = Modifier
-                    .shadow(40.dp, shape = RoundedCornerShape(22.dp), spotColor = Color(0xFFBAC2E7))
-                    .size(68.dp)
-                    .background(Color.White, shape = CircleShape)
-                    .clickable {
-                        vm.frontEquipment {
-                            if(it != null) {
-                                Toast.makeText(context,"发生了错误: ${it!!.message}", Toast.LENGTH_SHORT).show()
-                                return@frontEquipment
-                            }
-
-                            val timer = Timer()
-                            val timerTask = object : TimerTask() {
-                                override fun run() {
-                                    vm.fetchData()
+                                    runBlocking {
+                                        withContext(Dispatchers.Main) {
+                                            Toast
+                                                .makeText(context, "电机1调紧", Toast.LENGTH_SHORT)
+                                                .show()
+                                        }
+                                    }
                                 }
-                            }
-                            timer.schedule(timerTask, 6000)
-
-
-                            runBlocking {
-                                withContext(Dispatchers.Main) {
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(text = "紧", fontSize = 20.sp, color = Color(0xFF3D8AFF))
+                    }
+                }
+                Box(
+                    modifier = Modifier
+                        .shadow(40.dp, shape = CircleShape, spotColor = Color(0xFFBAC2E7))
+                        .size(68.dp)
+                        .background(Color.White, shape = CircleShape)
+                        .clickable {
+                            vm.stopEquipment {
+                                if (it != null) {
                                     Toast
-                                        .makeText(context, "设备调紧", Toast.LENGTH_SHORT)
+                                        .makeText(
+                                            context,
+                                            "发生了错误: ${it!!.message}",
+                                            Toast.LENGTH_SHORT
+                                        )
                                         .show()
+                                    return@stopEquipment
+                                }
+
+                                runBlocking {
+                                    withContext(Dispatchers.Main) {
+                                        Toast
+                                            .makeText(context, "电机1停止", Toast.LENGTH_SHORT)
+                                            .show()
+                                    }
                                 }
                             }
-                        }
-                    },
-                contentAlignment = Alignment.Center
-            ) {
-                Text(text = "+", fontSize = 25.sp, color = Color(0xFF3D8AFF))
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = "停", fontSize = 20.sp, color = Color.Red)
+                }
+            }
+            Box(modifier = Modifier.padding(horizontal = 12.dp)) {
+                DashedDivider(
+                    modifier = Modifier
+                        .height(200.dp)
+                )
+            }
+            Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text("电机2", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .shadow(40.dp, shape = CircleShape, spotColor = Color(0xFFBAC2E7))
+                            .size(68.dp)
+                            .background(Color.White, shape = CircleShape)
+                            .clickable {
+                                vm.houEquipment {
+                                    if (it != null) {
+                                        Toast
+                                            .makeText(
+                                                context,
+                                                "发生了错误: ${it!!.message}",
+                                                Toast.LENGTH_SHORT
+                                            )
+                                            .show()
+                                        return@houEquipment
+                                    }
+
+                                    runBlocking {
+                                        withContext(Dispatchers.Main) {
+                                            Toast
+                                                .makeText(context, "电机2调松", Toast.LENGTH_SHORT)
+                                                .show()
+                                        }
+                                    }
+                                }
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(text = "松", fontSize = 20.sp, color = Color(0xFF3D8AFF))
+                    }
+                    Box(
+                        modifier = Modifier
+                            .shadow(
+                                40.dp,
+                                shape = RoundedCornerShape(22.dp),
+                                spotColor = Color(0xFFBAC2E7)
+                            )
+                            .size(68.dp)
+                            .background(Color.White, shape = CircleShape)
+                            .clickable {
+                                vm.qianEquipment {
+                                    if (it != null) {
+                                        Toast
+                                            .makeText(
+                                                context,
+                                                "发生了错误: ${it!!.message}",
+                                                Toast.LENGTH_SHORT
+                                            )
+                                            .show()
+                                        return@qianEquipment
+                                    }
+
+                                    runBlocking {
+                                        withContext(Dispatchers.Main) {
+                                            Toast
+                                                .makeText(context, "电机2调紧", Toast.LENGTH_SHORT)
+                                                .show()
+                                        }
+                                    }
+                                }
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(text = "紧", fontSize = 20.sp, color = Color(0xFF3D8AFF))
+                    }
+                }
+                Box(
+                    modifier = Modifier
+                        .shadow(40.dp, shape = CircleShape, spotColor = Color(0xFFBAC2E7))
+                        .size(68.dp)
+                        .background(Color.White, shape = CircleShape)
+                        .clickable {
+                            vm.tingEquipment {
+                                if (it != null) {
+                                    Toast
+                                        .makeText(
+                                            context,
+                                            "发生了错误: ${it!!.message}",
+                                            Toast.LENGTH_SHORT
+                                        )
+                                        .show()
+                                    return@tingEquipment
+                                }
+
+                                runBlocking {
+                                    withContext(Dispatchers.Main) {
+                                        Toast
+                                            .makeText(context, "电机2停止", Toast.LENGTH_SHORT)
+                                            .show()
+                                    }
+                                }
+                            }
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = "停", fontSize = 20.sp, color = Color.Red)
+                }
             }
         }
 //        Column(
@@ -209,7 +354,7 @@ private fun buildAdjustPrecise(vm: EquipmentAdjustViewModel) {
                 vm.fetchData()
             }
         }
-        timer.schedule(timerTask, 50, 9000000)
+        timer.schedule(timerTask, 50, 2000)
 
         onDispose {
             timerTask.cancel()
@@ -246,7 +391,7 @@ private fun buildAdjustPrecise(vm: EquipmentAdjustViewModel) {
                             .padding(20.dp)
                     ) {
                         pressValue.forEachIndexed {idx, it ->
-                            val value = (it * 100).toInt()
+                            val value = it.toInt()
                             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                 VerticalSlider(
                                     progressValue = value,

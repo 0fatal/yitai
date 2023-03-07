@@ -18,7 +18,10 @@ enum class Command(val value: String) {
     TWINKLE("twinkle"),
     FRONT("front"),
     BACK("back"),
-    STOP("stop")
+    STOP("stop"),
+    QIAN("qian"),
+    HOU("hou"),
+    TING("ting"),
 }
 
 @Singleton
@@ -106,6 +109,22 @@ class Bemfa @Inject constructor() {
 
     fun back(completion: ((IOException?) -> Unit)? = null) {
         return postData(Command.BACK, completion)
+    }
+
+    fun qian(completion: ((IOException?) -> Unit)? = null) {
+        return postData(Command.QIAN, completion)
+    }
+
+    fun hou(completion: ((IOException?) -> Unit)? = null) {
+        return postData(Command.HOU, completion)
+    }
+
+    fun stop(completion: ((IOException?) -> Unit)? = null) {
+        return postData(Command.STOP, completion)
+    }
+
+    fun ting(completion: ((IOException?) -> Unit)? = null) {
+        return postData(Command.TING, completion)
     }
 
 }
