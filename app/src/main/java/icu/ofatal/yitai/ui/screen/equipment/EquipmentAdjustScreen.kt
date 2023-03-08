@@ -1,10 +1,7 @@
 package icu.ofatal.yitai.ui.screen.equipment
 
-import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,10 +19,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.smarttoolfactory.slider.*
 import icu.ofatal.yitai.R
-import icu.ofatal.yitai.data.api.Bemfa
 import icu.ofatal.yitai.ui.component.DashedDivider
-import icu.ofatal.yitai.ui.component.VerticalSlider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -35,6 +31,7 @@ import java.util.TimerTask
 @Preview
 @Composable
 fun EquipmentAdjustScreen(vm: EquipmentAdjustViewModel = hiltViewModel()) {
+    val scrollState = rememberScrollState(0)
     Box(modifier = Modifier.fillMaxHeight(fraction = 0.85f)) {
         Image(
             painter = painterResource(id = R.drawable.equipment_adjustment_background),
@@ -42,7 +39,12 @@ fun EquipmentAdjustScreen(vm: EquipmentAdjustViewModel = hiltViewModel()) {
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
-        Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
+        Column(
+            modifier = Modifier
+                .padding(20.dp)
+                .verticalScroll(scrollState),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
             buildTopBar()
             buildAdjust(vm)
             buildAdjustPrecise(vm)
@@ -90,7 +92,10 @@ private fun buildAdjust(vm: EquipmentAdjustViewModel) {
 //            }
 //        }
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
                 Text("电机1", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -213,7 +218,10 @@ private fun buildAdjust(vm: EquipmentAdjustViewModel) {
                         .height(200.dp)
                 )
             }
-            Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
                 Text("电机2", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -341,12 +349,12 @@ private fun buildAdjustPrecise(vm: EquipmentAdjustViewModel) {
         var firstRun = false
         val timerTask = object : TimerTask() {
             override fun run() {
-                if(!firstRun) {
+                if (!firstRun) {
                     firstRun = true
                     runBlocking {
                         vm.twinkle()
                         withContext(Dispatchers.Main) {
-                            Toast.makeText(context,"连接成功", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "连接成功", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -363,12 +371,12 @@ private fun buildAdjustPrecise(vm: EquipmentAdjustViewModel) {
     }
 
     LaunchedEffect(key1 = error) {
-        if(error != null) {
-            Toast.makeText(context,"发生了错误: ${error!!.message}", Toast.LENGTH_SHORT).show()
+        if (error != null) {
+            Toast.makeText(context, "发生了错误: ${error!!.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
-    Column(modifier = Modifier.padding(top = 16.dp)) {
+    Column(modifier = Modifier.padding(top = 16.dp, bottom = 30.dp)) {
         Text(
             text = "矫形力数据",
             fontSize = 18.sp,
@@ -384,32 +392,52 @@ private fun buildAdjustPrecise(vm: EquipmentAdjustViewModel) {
         ) {
             Column {
                 Box(contentAlignment = Alignment.Center) {
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
+                    Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(20.dp)
+                            .padding(10.dp)
                     ) {
-                        pressValue.forEachIndexed {idx, it ->
-                            val value = it.toInt()
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                VerticalSlider(
-                                    progressValue = value,
-                                    width = 6.dp,
-                                    height = 136.dp,
-                                    progressTrackColor = Color(listOf(0xFFFF8D1A, 0xFF3D87FF,0xFF3D87FF,0xFF3D87FF,0xFFFF8D1A,0xFF3D87FF,0xFFFF8D1A,0xFFFF8D1A,0xFF3D87FF)[idx]).copy(0.62f)
-                                )
-                                Text("F${idx+1}", fontSize = 10.sp)
+                        pressValue.forEachIndexed { idx, it ->
+                            val color = SliderBrushColor(
+                                color = Color(
+                                    listOf(
+                                        0xFFFF8D1A,
+                                        0xFF3D87FF,
+                                        0xFF3D87FF,
+                                        0xFF3D87FF,
+                                        0xFFFF8D1A,
+                                        0xFF3D87FF,
+                                        0xFFFF8D1A,
+                                        0xFFFF8D1A,
+                                        0xFF3D87FF
+                                    )[idx]
+                                ).copy(0.62f)
+                            )
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Text("F${idx + 1}", fontSize = 10.sp)
+                                Box(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(30.dp)
+                                        .padding(horizontal = 6.dp)
+                                ) {
+                                    SliderWithLabel(
+                                        value = it.toFloat(),
+                                        onValueChange = { it ->
+                                        },
+                                        valueRange = 0f..100f,
+                                        colors = MaterialSliderDefaults.defaultColors(
+                                            activeTrackColor = color,
+                                            inactiveTickColor = color,
+                                        ),
+                                        trackHeight = 10.dp,
+                                        thumbRadius = 0.dp,
+                                    )
+                                }
                                 Text("${String.format("%.2f", it)}N", fontSize = 8.sp)
                             }
                         }
                     }
-                    DashedDivider(
-                        thickness = 1.dp, modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        color = Color(0xFFE9EAFF)
-                    )
                 }
 //                Row(
 //                    modifier = Modifier
